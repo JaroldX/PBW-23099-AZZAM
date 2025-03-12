@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Form Penjualan</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f8f8f8;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        .container {
+            background: white;
+            padding: 20px;
+            margin: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            width: 90%;
+            max-width: 600px;
+        }
+        h2 {
+            text-align: center;
+        }
+        input {
+            width: 100%;
+            padding: 10px;
+            margin: 5px 0;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        .btn {
+            width: 100%;
+            background: blue;
+            color: white;
+            padding: 10px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        .table-container {
+            background: white;
+            padding: 20px;
+            margin: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            width: 90%;
+            max-width: 800px;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        th, td {
+            border: 1px solid #ddd;
+            padding: 10px;
+            text-align: center;
+        }
+        th {
+            background: blue;
+            color: white;
+        }
+        .total {
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>Form Penjualan</h2>
+        <form>
+            <label>Produk</label>
+            <input type="text" name="produk" required>
+            <label>Jumlah</label>
+            <input type="number" name="jumlah" required>
+            <label>Harga</label>
+            <input type="text" name="harga" required>
+            <button class="btn" type="submit">Tambahkan</button>
+        </form>
+    </div>
+
+    <div class="table-container">
+        <h2>Data Penjualan Bulanan</h2>
+        <table>
+            <tr>
+                <th>No</th>
+                <th>Produk</th>
+                <th>Jumlah</th>
+                <th>Harga Total</th>
+            </tr>
+            <tr>
+                <td>1</td>
+                <td>Sepatu</td>
+                <td>50</td>
+                <td>Rp 25.000.000</td>
+            </tr>
+            <tr>
+                <td>2</td>
+                <td>Tas</td>
+                <td>30</td>
+                <td>Rp 15.000.000</td>
+            </tr>
+            <tr>
+                <td>3</td>
+                <td>Jam Tangan</td>
+                <td>20</td>
+                <td>Rp 10.000.000</td>
+            </tr>
+            <tr class="total">
+                <td colspan="2">Total Penjualan</td>
+                <td>100</td>
+                <td>Rp 50.000.000</td>
+            </tr>
+        </table>
+    </div>
+</body>
+</html>

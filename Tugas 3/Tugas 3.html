@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Form Penjualan</title>
+  <!-- Bootstrap CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+  <div class="container my-4">
+    <!-- Card Form Penjualan -->
+    <div class="card mb-4">
+      <div class="card-header">
+        <h2 class="mb-0">Form Penjualan</h2>
+      </div>
+      <div class="card-body">
+        <form id="salesForm">
+          <div class="mb-3">
+            <label for="produk" class="form-label">Produk</label>
+            <input type="text" class="form-control" id="produk" name="produk" required>
+          </div>
+          <div class="mb-3">
+            <label for="jumlah" class="form-label">Jumlah</label>
+            <input type="number" class="form-control" id="jumlah" name="jumlah" required>
+          </div>
+          <div class="mb-3">
+            <label for="harga" class="form-label">Harga Satuan</label>
+            <input type="number" class="form-control" id="harga" name="harga" required>
+          </div>
+          <button type="submit" class="btn btn-primary w-100">Tambahkan</button>
+        </form>
+      </div>
+    </div>
+    
+    <!-- Card Tabel Data Penjualan -->
+    <div class="card">
+      <div class="card-header">
+        <h2 class="mb-0">Data Penjualan Bulanan</h2>
+      </div>
+      <div class="card-body">
+        <table class="table table-bordered table-striped" id="salesTable">
+          <thead class="table-primary">
+            <tr>
+              <th>No</th>
+              <th>Produk</th>
+              <th>Jumlah</th>
+              <th>Harga Total</th>
+            </tr>
+          </thead>
+          <tbody id="salesTableBody">
+            <tr>
+              <td>1</td>
+              <td>Sepatu</td>
+              <td>50</td>
+              <td data-harga="25000000">Rp 25.000.000</td>
+            </tr>
+            <tr>
+              <td>2</td>
+              <td>Tas</td>
+              <td>30</td>
+              <td data-harga="15000000">Rp 15.000.000</td>
+            </tr>
+            <tr>
+              <td>3</td>
+              <td>Jam Tangan</td>
+              <td>20</td>
+              <td data-harga="10000000">Rp 10.000.000</td>
+            </tr>
+          </tbody>
+          <tfoot>
+            <tr class="table-dark">
+              <td colspan="2">Total Penjualan</td>
+              <td id="totalJumlah">100</td>
+              <td id="totalHarga">Rp 50.000.000</td>
+            </tr>
+          </tfoot>
+        </table>
+      </div>
+    </div>
+  </div>
+  
+  <!-- Bootstrap JS Bundle with Popper -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+  
+  <!-- JavaScript untuk menangani form dan update tabel -->
+  <script>
+    // Inisialisasi total awal berdasarkan data awal di tabel
+    let totalQuantity = 100;
+    let totalSales = 25000000 + 15000000 + 10000000; // 50.000.000
+    
+    document.getElementById('salesForm').addEventListener('submit', function(event) {
+      event.preventDefault();
+      
+      // Ambil nilai input
+      const produk = document.getElementById('produk').value;
+      const jumlah = parseInt(document.getElementById('jumlah').value);
+      const harga = parseInt(document.getElementById('harga').value);
+      
+      // Hitung harga total (asumsi harga adalah harga satuan)
+      const hargaTotal = jumlah * harga;
+      
+      // Update total keseluruhan
+      totalQuantity += jumlah;
+      totalSales += hargaTotal;
+      
+      // Dapatkan nomor urut baris berikutnya
+      const tableBody = document.getElementById('salesTableBody');
+      const newRowNumber = tableBody.rows.length + 1;
+      
+      // Buat elemen baris baru
+      const row = document.createElement('tr');
+      
+      const cellNo = document.createElement('td');
+      cellNo.textContent = newRowNumber;
+      row.appendChild(cellNo);
+      
+      const cellProduk = document.createElement('td');
+      cellProduk.textContent = produk;
+      row.appendChild(cellProduk);
+      
+      const cellJumlah = document.createElement('td');
+      cellJumlah.textContent = jumlah;
+      row.appendChild(cellJumlah);
+      
+      const cellHarga = document.createElement('td');
+      cellHarga.setAttribute('data-harga', hargaTotal);
+      cellHarga.textContent = formatRupiah(hargaTotal);
+      row.appendChild(cellHarga);
+      
+      // Tambahkan baris baru ke tabel
+      tableBody.appendChild(row);
+      
+      // Update baris total penjualan
+      document.getElementById('totalJumlah').textContent = totalQuantity;
+      document.getElementById('totalHarga').textContent = formatRupiah(totalSales);
+      
+      // Reset form
+      this.reset();
+    });
+    
+    // Fungsi untuk memformat angka ke dalam format Rupiah
+    function formatRupiah(number) {
+      return 'Rp ' + number.toLocaleString('id-ID');
+    }
+  </script>
+</body>
+</html>
